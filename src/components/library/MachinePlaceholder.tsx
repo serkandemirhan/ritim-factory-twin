@@ -3,6 +3,7 @@ import type { MachineStatus } from "../../types/factory";
 interface MachinePlaceholderProps {
   selected: boolean;
   status: MachineStatus;
+  variant: number;
 }
 
 const statusStyles: Record<MachineStatus, { color: string; glow: string }> = {
@@ -11,11 +12,13 @@ const statusStyles: Record<MachineStatus, { color: string; glow: string }> = {
   alarm: { color: "#dc2626", glow: "#fca5a5" },
 };
 
-export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps) {
+export function MachinePlaceholder({ selected, status, variant }: MachinePlaceholderProps) {
   const statusStyle = statusStyles[status];
   // Keep industrial equipment neutral; its beacon and slim status strip carry the live state.
   const bodyColor = selected ? "#345d61" : "#aeb9bb";
   const darkMetal = "#26343b";
+  const panelAccents = ["#1d7580", "#2563a8", "#7c3f78", "#a16207", "#0f766e", "#475569", "#0e7490", "#9f1239", "#365314"];
+  const panelAccent = panelAccents[variant % panelAccents.length];
 
   return (
     <group>
@@ -40,7 +43,7 @@ export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps
           </mesh>
           <mesh castShadow position={[0, 0.04, 0.05]}>
             <boxGeometry args={[0.82, 0.92, 0.03]} />
-            <meshStandardMaterial color="#78c7d0" emissive="#1d7580" emissiveIntensity={0.35} />
+            <meshStandardMaterial color="#78c7d0" emissive={panelAccent} emissiveIntensity={0.35} />
           </mesh>
           <mesh castShadow position={[x > 0 ? -0.42 : 0.42, -0.04, 0.1]}>
             <boxGeometry args={[0.06, 1.12, 0.08]} />
@@ -62,7 +65,7 @@ export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps
         </mesh>
         <mesh castShadow position={[0, 1.24, 0.19]} rotation={[-0.22, 0, 0]}>
           <boxGeometry args={[0.45, 0.38, 0.04]} />
-          <meshStandardMaterial color="#1d5f69" emissive="#0f766e" emissiveIntensity={0.42} />
+          <meshStandardMaterial color={panelAccent} emissive={panelAccent} emissiveIntensity={0.42} />
         </mesh>
         <mesh castShadow position={[0, 0.11, 0]}>
           <cylinderGeometry args={[0.25, 0.32, 0.18, 20]} />

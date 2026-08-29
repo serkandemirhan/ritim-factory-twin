@@ -38,10 +38,16 @@ function activityLabelHeight(assetType: FactoryObject["assetType"]): number {
   return 2.1;
 }
 
-function getMachineLabel(name: string): string | null {
+function getMachineDetails(name: string): { label: string; variant: number } | null {
   const number = name.match(/\d+/)?.[0];
+  const models = [
+    "HAAS VF-2", "DMG MORI CMX 600 V", "OKUMA GENOS M560", "DOOSAN DNM 4500",
+    "MAZAK VCN-530C", "HYUNDAI WIA KF5600", "BROTHER SPEEDIO", "FANUC ROBODRILL", "HARTFORD HSA",
+  ];
 
-  return number ? `CNC${number.padStart(2, "0")} · MAZAK VCN` : null;
+  if (!number) return null;
+  const variant = (Number(number) - 1) % models.length;
+  return { label: `CNC${number.padStart(2, "0")} · ${models[variant]}`, variant };
 }
 
 function getStockStage(name: string): StockStage {
@@ -87,6 +93,7 @@ export function FactoryObject3D({
   const openActivityDetail = useFactoryStore((state) => state.openActivityDetail);
   const isTruck = object.libraryObjectId === "delivery-truck";
   const animationOffset = Array.from(object.id).reduce((total, character) => total + character.charCodeAt(0), 0) % 11;
+  const machineDetails = getMachineDetails(object.name);
 
   useFrame(({ clock }) => {
     if (!groupRef.current) {
@@ -188,9 +195,9 @@ export function FactoryObject3D({
       }}
     >
       {definition.category === "Machines" && (
-        <MachinePlaceholder selected={selected} status={machineStatus} />
+        <MachinePlaceholder selected={selected} status={machineStatus} variant={machineDetails?.variant ?? 0} />
       )}
-      {definition.category === "Machines" && getMachineLabel(object.name) && (
+      {definition.category === "Machines" && machineDetails && (
         <Billboard position={[0, 4.25, 0]}>
           <Text
             fontSize={0.44}
@@ -201,7 +208,7 @@ export function FactoryObject3D({
             anchorY="middle"
             letterSpacing={0.04}
           >
-            {getMachineLabel(object.name)}
+            {machineDetails.label}
           </Text>
         </Billboard>
       )}
