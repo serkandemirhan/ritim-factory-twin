@@ -68,71 +68,71 @@ function PerimeterWalls() {
 
   return (
     <group>
-      <mesh castShadow receiveShadow position={[0, 0.4, -35.8]}><boxGeometry args={[80, 0.8, 0.4]} />{wallMaterial}</mesh>
-      <mesh castShadow receiveShadow position={[-39.8, 0.4, -6.9]}><boxGeometry args={[0.4, 0.8, 57.8]} />{wallMaterial}</mesh>
-      <mesh castShadow receiveShadow position={[39.8, 0.4, 25]}><boxGeometry args={[0.4, 0.8, 21.6]} />{wallMaterial}</mesh>
-      <mesh castShadow receiveShadow position={[39.8, 0.4, -30]}><boxGeometry args={[0.4, 0.8, 11.6]} />{wallMaterial}</mesh>
-      <mesh castShadow receiveShadow position={[0, 0.4, 35.8]}><boxGeometry args={[80, 0.8, 0.4]} />{wallMaterial}</mesh>
+      <mesh castShadow receiveShadow position={[0, 0.4, -29.8]}><boxGeometry args={[64, 0.8, 0.4]} />{wallMaterial}</mesh>
+      <mesh castShadow receiveShadow position={[-31.8, 0.4, -6.9]}><boxGeometry args={[0.4, 0.8, 45.8]} />{wallMaterial}</mesh>
+      <mesh castShadow receiveShadow position={[31.8, 0.4, 24]}><boxGeometry args={[0.4, 0.8, 11.6]} />{wallMaterial}</mesh>
+      <mesh castShadow receiveShadow position={[31.8, 0.4, -24]}><boxGeometry args={[0.4, 0.8, 11.6]} />{wallMaterial}</mesh>
+      <mesh castShadow receiveShadow position={[0, 0.4, 29.8]}><boxGeometry args={[64, 0.8, 0.4]} />{wallMaterial}</mesh>
     </group>
   );
 }
 
 export function FactoryFloor() {
-  const rawZones = [-30, -19, -8];
-  const wipZones = [5, 14, 23, 32];
+  const rawZones = [-25, -17, -9];
+  const wipZones = [1, 9, 17, 25];
 
   return (
     <group>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
-        <planeGeometry args={[80, 72]} />
+        <planeGeometry args={[64, 60]} />
         <meshStandardMaterial color="#d7e0e0" roughness={0.92} />
       </mesh>
-      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[50, -0.012, -4]}>
-        <planeGeometry args={[20, 55]} />
+      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[42, -0.012, 0]}>
+        <planeGeometry args={[20, 46]} />
         <meshStandardMaterial color="#aebdc1" roughness={0.9} />
       </mesh>
-      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[-50, -0.012, 29]}>
-        <planeGeometry args={[20, 14]} />
+      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[-42, -0.012, 23]}>
+        <planeGeometry args={[20, 12]} />
         <meshStandardMaterial color="#aebdc1" roughness={0.9} />
       </mesh>
 
-      <FloorZone position={[-2, 0.01, -1]} size={[62, 46]} color="#b6d8d6"><ZoneBorder size={[62, 46]} color="#5c8d8a" /></FloorZone>
+      <FloorZone position={[-4, 0.01, -3]} size={[46, 34]} color="#b6d8d6"><ZoneBorder size={[46, 34]} color="#5c8d8a" /></FloorZone>
       {rawZones.map((x, index) => (
-        <FloorZone key={x} position={[x, 0.01, 29]} size={[9.6, 11]} color="#e8bd58">
-          <ZoneBorder size={[9.6, 11]} color="#b7791f" />
-          <FloorLabel position={[0, 0.035, 4.15]} size={0.39}>{`HAMMADDE ${index + 1}`}</FloorLabel>
+        <FloorZone key={x} position={[x, 0.01, 23]} size={[7.2, 10]} color="#e8bd58">
+          <ZoneBorder size={[7.2, 10]} color="#b7791f" />
+          <FloorLabel position={[0, 0.035, 3.7]} size={0.34}>{`HAMMADDE ${index + 1}`}</FloorLabel>
         </FloorZone>
       ))}
       {wipZones.map((x, index) => (
-        <FloorZone key={x} position={[x, 0.01, 29]} size={[7.6, 11]} color="#55c5ba">
-          <ZoneBorder size={[7.6, 11]} color="#23857c" />
-          <FloorLabel position={[0, 0.035, 4.15]} size={0.36}>{`WIP-${index + 1}`}</FloorLabel>
+        <FloorZone key={x} position={[x, 0.01, 23]} size={[5.8, 10]} color="#55c5ba">
+          <ZoneBorder size={[5.8, 10]} color="#23857c" />
+          <FloorLabel position={[0, 0.035, 3.7]} size={0.32}>{`WIP-${index + 1}`}</FloorLabel>
         </FloorZone>
       ))}
-      <FloorZone position={[34, 0.01, -4]} size={[10, 51]} color="#d6e2e4"><ZoneBorder size={[10, 51]} color="#64748b" /></FloorZone>
-      <FloorZone position={[-34, 0.01, 29]} size={[10, 12]} color="#e8bd58"><ZoneBorder size={[10, 12]} color="#b7791f" /></FloorZone>
-      <FloorZone position={[-28, 0.01, -28]} size={[14, 11]} color="#a8c9d0"><ZoneBorder size={[14, 11]} color="#547580" /></FloorZone>
+      <FloorZone position={[28, 0.01, 0]} size={[7, 46]} color="#d6e2e4"><ZoneBorder size={[7, 46]} color="#64748b" /></FloorZone>
+      <FloorZone position={[-28, 0.01, 23]} size={[7, 10]} color="#e8bd58"><ZoneBorder size={[7, 10]} color="#b7791f" /></FloorZone>
+      <FloorZone position={[-21, 0.01, -22]} size={[13, 10]} color="#a8c9d0"><ZoneBorder size={[13, 10]} color="#547580" /></FloorZone>
 
-      <FloorLabel position={[-2, 0.035, -22]} size={0.82}>URETIM HATLARI</FloorLabel>
-      <FloorLabel position={[34, 0.035, -30]} size={0.55}>SEVKIYAT VE YUKLEME</FloorLabel>
-      <FloorLabel position={[50, 0.035, -30]} size={0.48}>DIS YUKLEME SAHASI</FloorLabel>
-      <FloorLabel position={[-50, 0.035, 23]} size={0.45}>HAMMADDE GIRIS SAHASI</FloorLabel>
-      <FloorLabel position={[-28, 0.035, -32.2]} size={0.56}>YONETIM OFISI</FloorLabel>
-      <FloorLabel position={[18, 0.035, 22.2]} size={0.5}>KALITE VE LOJISTIK KORIDOR</FloorLabel>
+      <FloorLabel position={[-4, 0.035, -18.5]} size={0.7}>URETIM HATLARI</FloorLabel>
+      <FloorLabel position={[28, 0.035, -22]} size={0.48}>SEVKIYAT VE YUKLEME</FloorLabel>
+      <FloorLabel position={[42, 0.035, -22]} size={0.42}>DIS YUKLEME SAHASI</FloorLabel>
+      <FloorLabel position={[-42, 0.035, 18]} size={0.4}>HAMMADDE GIRIS SAHASI</FloorLabel>
+      <FloorLabel position={[-21, 0.035, -26]} size={0.48}>YONETIM OFISI</FloorLabel>
+      <FloorLabel position={[14, 0.035, 15]} size={0.42}>KALITE VE LOJISTIK KORIDOR</FloorLabel>
 
-      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[-2, 0.004, -27]}>
-        <planeGeometry args={[62, 4]} />
+      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[-4, 0.004, -22]}>
+        <planeGeometry args={[46, 4]} />
         <meshStandardMaterial color="#bcc8c9" />
       </mesh>
-      <DashedLane position={[-2, 0, -27]} length={61} />
-      <DashedLane position={[28, 0, 0]} length={55} vertical />
-      <DashedLane position={[-2, 0, 23]} length={62} />
-      <DashedLane position={[50, 0, -4]} length={53} vertical />
-      {[-31, -20, -9, 2, 13, 24].map((x) => (
-        <mesh key={x} position={[x, 0.023, -25.8]} rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[7.8, 0.13]} /><meshBasicMaterial color="#fbbf24" /></mesh>
+      <DashedLane position={[-4, 0, -22]} length={45} />
+      <DashedLane position={[22, 0, 0]} length={45} vertical />
+      <DashedLane position={[-4, 0, 17]} length={46} />
+      <DashedLane position={[42, 0, 0]} length={44} vertical />
+      {[-25, -16, -7, 2, 11, 20].map((x) => (
+        <mesh key={x} position={[x, 0.023, -20.8]} rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[6.2, 0.13]} /><meshBasicMaterial color="#fbbf24" /></mesh>
       ))}
-      {[-20, -9, 2, 13].map((z) => (
-        <mesh key={z} position={[34, 0.023, z - 2.2]} rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[7, 0.14]} /><meshBasicMaterial color="#fbbf24" /></mesh>
+      {[-15, -5, 5, 15].map((z) => (
+        <mesh key={z} position={[28, 0.023, z - 2.2]} rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[5.2, 0.14]} /><meshBasicMaterial color="#fbbf24" /></mesh>
       ))}
       <PerimeterWalls />
     </group>

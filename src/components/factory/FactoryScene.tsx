@@ -36,14 +36,14 @@ export function FactoryScene({ onObjectContextMenu }: FactorySceneProps) {
 
   useEffect(() => {
     if (applicationMode === "operations") {
-      camera.position.set(48, 78, 48);
+      camera.position.set(38, 56, 38);
       camera.lookAt(0, 0, 0);
       orbitControlsRef.current?.target.set(0, 0, 0);
       orbitControlsRef.current?.update();
       return;
     }
 
-    camera.position.set(0, 88, 0);
+    camera.position.set(0, 68, 0);
     camera.lookAt(0, 0, 0);
     orbitControlsRef.current?.target.set(0, 0, 0);
     orbitControlsRef.current?.update();
@@ -156,7 +156,7 @@ export function FactoryScene({ onObjectContextMenu }: FactorySceneProps) {
       />
       <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#cbd5e1" />
       <FactoryFloor />
-      <gridHelper args={[80, 80, "#94a3b8", "#cbd5e1"]} position={[0, 0.001, 0]} />
+      <gridHelper args={[64, 64, "#94a3b8", "#cbd5e1"]} position={[0, 0.001, 0]} />
 
       {objects.map((object) => (
         <FactoryObject3D
@@ -193,7 +193,7 @@ export function FactoryScene({ onObjectContextMenu }: FactorySceneProps) {
         maxPolarAngle={applicationMode === "design" ? 0.01 : Math.PI / 4}
         minPolarAngle={applicationMode === "design" ? 0.01 : 0}
         minDistance={8}
-        maxDistance={110}
+        maxDistance={90}
         target={[0, 0, 0]}
         mouseButtons={{
           LEFT: MOUSE.ROTATE,

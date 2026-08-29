@@ -12,7 +12,7 @@ import type {
 import { loadLayoutSnapshot, saveLayoutSnapshot } from "../utils/layoutPersistence";
 import { createId } from "../utils/ids";
 
-const FLOOR_LIMIT = 36;
+const FLOOR_LIMIT = 28;
 
 function clampToFloor(value: number): number {
   return Math.max(-FLOOR_LIMIT, Math.min(FLOOR_LIMIT, value));
@@ -291,10 +291,10 @@ export const useFactoryStore = create<FactoryState>((set, get) => ({
           to: { x: destination.position.x, y: 0, z: destination.position.z - 1.6 },
           // Keep transfers on the logistics corridors instead of cutting through work cells.
           waypoints: [
-            { x: object.position.x + 2.3, y: 0, z: -27 },
-            { x: 28, y: 0, z: -27 },
-            { x: 28, y: 0, z: 23 },
-            { x: destination.position.x, y: 0, z: 23 },
+            { x: object.position.x + 2.3, y: 0, z: -22 },
+            { x: 22, y: 0, z: -22 },
+            { x: 22, y: 0, z: 17 },
+            { x: destination.position.x, y: 0, z: 17 },
           ],
         };
       }
@@ -310,8 +310,8 @@ export const useFactoryStore = create<FactoryState>((set, get) => ({
           from: { x: object.position.x, y: 0, z: object.position.z + 1.5 },
           to: { x: destination.position.x, y: 0, z: destination.position.z - 1.6 },
           waypoints: [
-            { x: object.position.x, y: 0, z: 23 },
-            { x: destination.position.x, y: 0, z: 23 },
+            { x: object.position.x, y: 0, z: 17 },
+            { x: destination.position.x, y: 0, z: 17 },
           ],
         };
       }
@@ -325,8 +325,8 @@ export const useFactoryStore = create<FactoryState>((set, get) => ({
           from: { x: object.position.x, y: 0, z: object.position.z - 1.5 },
           to: { x: destination.position.x, y: 0, z: destination.position.z },
           waypoints: [
-            { x: object.position.x, y: 0, z: 23 },
-            { x: destination.position.x, y: 0, z: 23 },
+            { x: object.position.x, y: 0, z: 17 },
+            { x: destination.position.x, y: 0, z: 17 },
           ],
         };
       }
@@ -340,8 +340,8 @@ export const useFactoryStore = create<FactoryState>((set, get) => ({
           from: { x: object.position.x, y: 0, z: object.position.z },
           to: { x: destination.position.x - 2, y: 0, z: destination.position.z },
           waypoints: [
-            { x: 28, y: 0, z: object.position.z },
-            { x: 32, y: 0, z: destination.position.z },
+            { x: 22, y: 0, z: object.position.z },
+            { x: 25, y: 0, z: destination.position.z },
           ],
         };
       }

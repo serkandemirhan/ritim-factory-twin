@@ -24,7 +24,7 @@ export function FactoryCanvas({ onObjectContextMenu, onDismissContextMenu }: Fac
   return (
     <div className="factory-canvas" onContextMenu={(event) => event.preventDefault()}>
       <Canvas
-        camera={{ position: [0, 88, 0], fov: 42, near: 0.1, far: 180 }}
+        camera={{ position: [0, 68, 0], fov: 42, near: 0.1, far: 150 }}
         shadows={!isMobile}
         dpr={[1, isMobile ? 1.25 : 2]}
         onPointerMissed={() => {
