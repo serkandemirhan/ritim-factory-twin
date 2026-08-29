@@ -85,7 +85,6 @@ export function FactoryObject3D({
   const machineStatus = useFactoryStore((state) => state.machineStatuses[object.id] ?? "running");
   const applicationMode = useFactoryStore((state) => state.applicationMode);
   const openActivityDetail = useFactoryStore((state) => state.openActivityDetail);
-  const isOperator = object.libraryObjectId === "operator";
   const isTruck = object.libraryObjectId === "delivery-truck";
   const animationOffset = Array.from(object.id).reduce((total, character) => total + character.charCodeAt(0), 0) % 11;
 
@@ -105,18 +104,6 @@ export function FactoryObject3D({
     }
 
     const elapsed = clock.getElapsedTime() + animationOffset;
-
-    if (isOperator) {
-      // Operators pace within their assigned cell instead of walking through equipment.
-      const stride = Math.sin(elapsed * 1.8) * 0.48;
-      groupRef.current.position.set(
-        object.position.x + Math.cos(object.rotation.y) * stride,
-        object.position.y + Math.abs(Math.sin(elapsed * 3.6)) * 0.035,
-        object.position.z - Math.sin(object.rotation.y) * stride,
-      );
-      groupRef.current.rotation.y = object.rotation.y + (Math.cos(elapsed * 1.8) < 0 ? Math.PI : 0);
-      return;
-    }
 
     if (isTruck) {
       const phase = (elapsed % 18) / 18;
