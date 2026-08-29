@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFactoryStore } from "../../store/factoryStore";
 
 function formatTime(value: string): string {
@@ -9,8 +9,13 @@ function formatTime(value: string): string {
   }).format(new Date(value));
 }
 
-export function ActivityPanel() {
-  const [isOpen, setIsOpen] = useState(true);
+interface ActivityPanelProps {
+  isMobile: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+export function ActivityPanel({ isMobile, isOpen, onToggle }: ActivityPanelProps) {
   const activities = useFactoryStore((state) => state.activities);
   const selectedActivityId = useFactoryStore((state) => state.selectedActivityId);
   const objects = useFactoryStore((state) => state.objects);
@@ -28,15 +33,15 @@ export function ActivityPanel() {
   }, [closeActivityDetail, selectedActivity]);
 
   return (
-    <aside className={isOpen ? "panel activity-panel" : "panel activity-panel is-collapsed"}>
+    <aside className={`panel activity-panel${isOpen ? "" : " is-collapsed"}${isMobile && !isOpen ? " is-mobile-hidden" : ""}`}>
       <div className="panel-header activity-header">
         <div>
           <h2>Operations Activity</h2>
           <p>Ritim live simulation</p>
         </div>
-        <button className="panel-toggle" onClick={() => setIsOpen((open) => !open)} type="button">
+        {!isMobile && <button className="panel-toggle" onClick={onToggle} type="button">
           {isOpen ? "Hide" : "Open"}
-        </button>
+        </button>}
       </div>
 
       {isOpen && (

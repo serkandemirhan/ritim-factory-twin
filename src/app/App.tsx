@@ -12,6 +12,7 @@ export function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLibraryOpen, setIsLibraryOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [isActivityOpen, setIsActivityOpen] = useState(true);
   const [contextMenu, setContextMenu] = useState<{
     objectId: string;
     x: number;
@@ -30,7 +31,10 @@ export function App() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
-    const updateMobileState = () => setIsMobile(mediaQuery.matches);
+    const updateMobileState = () => {
+      setIsMobile(mediaQuery.matches);
+      setIsActivityOpen(!mediaQuery.matches);
+    };
 
     updateMobileState();
     mediaQuery.addEventListener("change", updateMobileState);
@@ -87,6 +91,8 @@ export function App() {
         isLibraryOpen={isLibraryOpen}
         onLibraryToggle={() => setIsLibraryOpen((open) => !open)}
         isMobileOperationsOnly={isMobile}
+        isActivityOpen={isActivityOpen}
+        onActivityToggle={() => setIsActivityOpen((open) => !open)}
       />
 
       <main
@@ -107,7 +113,13 @@ export function App() {
           />
         </section>
 
-        {applicationMode === "operations" ? <ActivityPanel /> : <PropertiesPanel />}
+        {applicationMode === "operations" ? (
+          <ActivityPanel
+            isMobile={isMobile}
+            isOpen={isActivityOpen}
+            onToggle={() => setIsActivityOpen((open) => !open)}
+          />
+        ) : <PropertiesPanel />}
       </main>
       {contextMenu && (
         <SceneContextMenu

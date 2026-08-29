@@ -15,6 +15,8 @@ interface TopBarProps {
   isLibraryOpen: boolean;
   onLibraryToggle: () => void;
   isMobileOperationsOnly: boolean;
+  isActivityOpen: boolean;
+  onActivityToggle: () => void;
 }
 
 function formatSavedAt(savedAt: string | null): string {
@@ -45,6 +47,8 @@ export function TopBar({
   isLibraryOpen,
   onLibraryToggle,
   isMobileOperationsOnly,
+  isActivityOpen,
+  onActivityToggle,
 }: TopBarProps) {
   return (
     <header className="top-bar">
@@ -52,7 +56,7 @@ export function TopBar({
         <div>
           <h1>Ritim Factory Twin</h1>
         </div>
-        <div className="mode-toggle">
+        {!isMobileOperationsOnly && <div className="mode-toggle">
           <button
             className={applicationMode === "operations" ? "mode-button is-active" : "mode-button"}
             onClick={() => onApplicationModeChange("operations")}
@@ -60,16 +64,14 @@ export function TopBar({
           >
             Operations
           </button>
-          {!isMobileOperationsOnly && (
-            <button
-              className={applicationMode === "design" ? "mode-button is-active" : "mode-button"}
-              onClick={() => onApplicationModeChange("design")}
-              type="button"
-            >
-              Design
-            </button>
-          )}
-        </div>
+          <button
+            className={applicationMode === "design" ? "mode-button is-active" : "mode-button"}
+            onClick={() => onApplicationModeChange("design")}
+            type="button"
+          >
+            Design
+          </button>
+        </div>}
       </div>
 
       <div className="top-bar-controls">
@@ -81,6 +83,19 @@ export function TopBar({
           />
         )}
         <div className="action-cluster">
+          {isMobileOperationsOnly && (
+            <button
+              className={isActivityOpen ? "activity-toggle is-active" : "activity-toggle"}
+              onClick={onActivityToggle}
+              type="button"
+              aria-label={isActivityOpen ? "Hide activity panel" : "Show activity panel"}
+              title={isActivityOpen ? "Hide activity" : "Show activity"}
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M4 18V10m5 8V5m5 13v-6m5 6V8" />
+              </svg>
+            </button>
+          )}
           <button
             className="fullscreen-button"
             onClick={onToggleFullscreen}
