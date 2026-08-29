@@ -1,5 +1,7 @@
+import { useFrame } from "@react-three/fiber";
+import { Billboard, Html, Text } from "@react-three/drei";
 import { Group } from "three";
-import { Html, Text } from "@react-three/drei";
+import { useRef } from "react";
 import { objectLibrary } from "../../data/objectLibrary";
 import { useFactoryStore } from "../../store/factoryStore";
 import type { FactoryObject } from "../../types/factory";
@@ -71,6 +73,8 @@ export function FactoryObject3D({
   isDirectMoveEnabled,
   onRefChange,
 }: FactoryObject3DProps) {
+  const groupRef = useRef<Group>(null);
+  const cargoRef = useRef<Group>(null);
   const definition = objectLibrary.find((item) => item.id === object.libraryObjectId);
   const activity = useFactoryStore((state) =>
     state.activities.find(
@@ -81,6 +85,67 @@ export function FactoryObject3D({
   const machineStatus = useFactoryStore((state) => state.machineStatuses[object.id] ?? "running");
   const applicationMode = useFactoryStore((state) => state.applicationMode);
   const openActivityDetail = useFactoryStore((state) => state.openActivityDetail);
+  const isOperator = object.libraryObjectId === "operator";
+  const isTruck = object.libraryObjectId === "delivery-truck";
+  const animationOffset = Array.from(object.id).reduce((total, character) => total + character.charCodeAt(0), 0) % 11;
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) {
+      return;
+    }
+
+    if (applicationMode !== "operations") {
+      groupRef.current.position.set(object.position.x, object.position.y, object.position.z);
+      groupRef.current.rotation.y = object.rotation.y;
+      groupRef.current.visible = true;
+      if (cargoRef.current) {
+        cargoRef.current.visible = true;
+      }
+      return;
+    }
+
+    const elapsed = clock.getElapsedTime() + animationOffset;
+
+    if (isOperator) {
+      // Operators pace within their assigned cell instead of walking through equipment.
+      const stride = Math.sin(elapsed * 1.8) * 0.48;
+      groupRef.current.position.set(
+        object.position.x + Math.cos(object.rotation.y) * stride,
+        object.position.y + Math.abs(Math.sin(elapsed * 3.6)) * 0.035,
+        object.position.z - Math.sin(object.rotation.y) * stride,
+      );
+      groupRef.current.rotation.y = object.rotation.y + (Math.cos(elapsed * 1.8) < 0 ? Math.PI : 0);
+      return;
+    }
+
+    if (isTruck) {
+      const phase = (elapsed % 18) / 18;
+      const direction = object.position.x >= 0 ? 1 : -1;
+      const approaching = phase < 0.25;
+      const departing = phase >= 0.66 && phase < 0.9;
+      const parked = phase >= 0.25 && phase < 0.66;
+      const distanceFromDock = approaching
+        ? 7 * (1 - phase / 0.25)
+        : departing
+          ? 7 * ((phase - 0.66) / 0.24)
+          : phase >= 0.9
+            ? 7
+            : 0;
+
+      groupRef.current.position.set(
+        object.position.x + direction * distanceFromDock,
+        object.position.y,
+        object.position.z,
+      );
+      groupRef.current.visible = phase < 0.96;
+
+      if (cargoRef.current) {
+        cargoRef.current.visible = parked;
+        const loadingProgress = Math.min(1, Math.max(0, (phase - 0.25) / 0.18));
+        cargoRef.current.position.z = 0.7 - (1 - loadingProgress) * 1.3;
+      }
+    }
+  });
 
   if (!definition) {
     return null;
@@ -88,7 +153,10 @@ export function FactoryObject3D({
 
   return (
     <group
-      ref={onRefChange}
+      ref={(instance) => {
+        groupRef.current = instance;
+        onRefChange(instance);
+      }}
       position={[object.position.x, object.position.y, object.position.z]}
       rotation={[object.rotation.x, object.rotation.y, object.rotation.z]}
       scale={[object.scale.x, object.scale.y, object.scale.z]}
@@ -136,17 +204,19 @@ export function FactoryObject3D({
         <MachinePlaceholder selected={selected} status={machineStatus} />
       )}
       {definition.category === "Machines" && getMachineLabel(object.name) && (
-        <Text
-          position={[0, 0.035, -1.5]}
-          rotation={[-Math.PI / 2, 0, 0]}
-          fontSize={0.34}
-          color="#101820"
-          anchorX="center"
-          anchorY="middle"
-          letterSpacing={0.04}
-        >
-          {getMachineLabel(object.name)}
-        </Text>
+        <Billboard position={[0, 4.25, 0]}>
+          <Text
+            fontSize={0.44}
+            color="#101820"
+            outlineWidth={0.025}
+            outlineColor="#f8fafc"
+            anchorX="center"
+            anchorY="middle"
+            letterSpacing={0.04}
+          >
+            {getMachineLabel(object.name)}
+          </Text>
+        </Billboard>
       )}
       {definition.category === "Quality" && (
         <QualityPlaceholder modelKey={definition.modelKey} selected={selected} />
@@ -159,6 +229,16 @@ export function FactoryObject3D({
       )}
       {definition.category === "Logistics" && (
         <LogisticsPlaceholder modelKey={definition.modelKey} selected={selected} />
+      )}
+      {isTruck && (
+        <group ref={cargoRef} position={[0, 2.12, 0.7]}>
+          {[-0.48, 0.48].map((x) => (
+            <mesh key={x} castShadow position={[x, 0, 0]}>
+              <boxGeometry args={[0.72, 0.52, 0.9]} />
+              <meshStandardMaterial color="#eab308" roughness={0.58} />
+            </mesh>
+          ))}
+        </group>
       )}
       {definition.category === "Infrastructure" && (
         <InfrastructurePlaceholder modelKey={definition.modelKey} selected={selected} />

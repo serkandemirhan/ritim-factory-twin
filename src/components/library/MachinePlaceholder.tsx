@@ -7,13 +7,14 @@ interface MachinePlaceholderProps {
 
 const statusStyles: Record<MachineStatus, { color: string; glow: string }> = {
   running: { color: "#0f9b8e", glow: "#5eead4" },
-  stopped: { color: "#d65a4a", glow: "#fb923c" },
+  stopped: { color: "#eab308", glow: "#fde68a" },
   alarm: { color: "#dc2626", glow: "#fca5a5" },
 };
 
 export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps) {
   const statusStyle = statusStyles[status];
-  const bodyColor = selected ? "#fbbf24" : "#d4dcdf";
+  // The full enclosure is the status signal: green running, amber stopped, red alarm.
+  const bodyColor = selected ? "#fbbf24" : statusStyle.color;
   const darkMetal = "#26343b";
 
   return (
@@ -24,7 +25,7 @@ export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps
       </mesh>
       <mesh castShadow receiveShadow position={[0, 1.5, 0]}>
         <boxGeometry args={[3.55, 2.65, 2.45]} />
-        <meshStandardMaterial color={bodyColor} metalness={0.22} roughness={0.52} />
+        <meshStandardMaterial color={bodyColor} emissive={bodyColor} emissiveIntensity={0.08} metalness={0.22} roughness={0.52} />
       </mesh>
 
       <mesh castShadow position={[0, 1.54, 1.25]}>
