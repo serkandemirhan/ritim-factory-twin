@@ -6,14 +6,14 @@ interface RackPlaceholderProps {
 }
 
 const rackStockColors = {
-  raw: "#e5a529",
-  wip: "#35a99d",
-  finished: "#2d6eaf",
+  raw: "#7a8585",
+  wip: "#557273",
+  finished: "#637382",
 };
 
 export function RackPlaceholder({ selected, stockStage }: RackPlaceholderProps) {
-  const frameColor = getBaseColor("#0f766e", selected);
-  const shelfColor = selected ? "#fde68a" : "#d9e4e5";
+  const frameColor = getBaseColor("#3b4c52", selected);
+  const shelfColor = selected ? "#19d3c5" : "#64747a";
 
   return (
     <group>
@@ -38,7 +38,7 @@ export function RackPlaceholder({ selected, stockStage }: RackPlaceholderProps) 
       {[-0.85, 0, 0.85].flatMap((x) => [0.48, 1.78, 3.08].map((y) => (
         <mesh key={`${x}-${y}`} castShadow position={[x, y, 0]}>
           <boxGeometry args={[0.65, 0.48, 1.2]} />
-          <meshStandardMaterial color={selected ? "#f59e0b" : rackStockColors[stockStage]} />
+          <meshStandardMaterial color={selected ? "#177f78" : rackStockColors[stockStage]} metalness={0.1} roughness={0.7} />
         </mesh>
       )))}
     </group>

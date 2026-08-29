@@ -4,16 +4,16 @@ interface PalletPlaceholderProps {
 }
 
 const stockColors = {
-  raw: { base: "#e5a529", top: "#f6c94e" },
-  wip: { base: "#2aa89b", top: "#4fc2b7" },
-  finished: { base: "#2563a8", top: "#5b9bd5" },
+  raw: { base: "#6f7d80", top: "#8d999b" },
+  wip: { base: "#4f6c6c", top: "#668080" },
+  finished: { base: "#526779", top: "#6f8290" },
 };
 
 export function PalletPlaceholder({ selected, stockStage }: PalletPlaceholderProps) {
-  const wood = selected ? "#fb923c" : "#b77945";
-  const shadow = selected ? "#fdba74" : "#8b5e34";
-  const stockColor = selected ? "#fbbf24" : stockColors[stockStage].base;
-  const stockTopColor = selected ? "#fde68a" : stockColors[stockStage].top;
+  const wood = selected ? "#19d3c5" : "#6b563f";
+  const shadow = selected ? "#0f766e" : "#42372b";
+  const stockColor = selected ? "#177f78" : stockColors[stockStage].base;
+  const stockTopColor = selected ? "#2ba79d" : stockColors[stockStage].top;
 
   return (
     <group>
@@ -33,11 +33,11 @@ export function PalletPlaceholder({ selected, stockStage }: PalletPlaceholderPro
         <group key={`${x}-${z}`} position={[x, 0, z]}>
           <mesh castShadow position={[0, 0.43, 0]}>
             <boxGeometry args={[0.58, 0.42, 0.32]} />
-            <meshStandardMaterial color={stockColor} roughness={0.55} />
+            <meshStandardMaterial color={stockColor} metalness={0.12} roughness={0.68} />
           </mesh>
           <mesh castShadow position={[0, 0.86, 0]}>
             <boxGeometry args={[0.58, 0.38, 0.32]} />
-            <meshStandardMaterial color={stockTopColor} roughness={0.5} />
+            <meshStandardMaterial color={stockTopColor} metalness={0.12} roughness={0.62} />
           </mesh>
         </group>
       )))}

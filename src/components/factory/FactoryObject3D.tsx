@@ -47,7 +47,7 @@ function getMachineDetails(name: string): { label: string; variant: number } | n
 
   if (!number) return null;
   const variant = (Number(number) - 1) % models.length;
-  return { label: `CNC${number.padStart(2, "0")} · ${models[variant]}`, variant };
+  return { label: `CNC-${number.padStart(2, "0")}`, variant };
 }
 
 function getStockStage(name: string): StockStage {
@@ -237,7 +237,7 @@ export function FactoryObject3D({
         </group>
       )}
       {definition.category === "Infrastructure" && (
-        <InfrastructurePlaceholder modelKey={definition.modelKey} selected={selected} />
+        definition.modelKey !== "infrastructure-operator" && <InfrastructurePlaceholder modelKey={definition.modelKey} selected={selected} />
       )}
       {definition.id === "material-bin" && (
         <mesh castShadow receiveShadow position={[0, 0.35, 0]}>
