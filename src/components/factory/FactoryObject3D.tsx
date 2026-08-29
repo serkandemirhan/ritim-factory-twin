@@ -53,14 +53,16 @@ function getMachineDetails(name: string): { label: string; variant: number } | n
 function getStockStage(name: string): StockStage {
   const normalizedName = name.toLowerCase();
 
-  if (normalizedName.includes("raw") || normalizedName.includes("input")) {
+  if (normalizedName.includes("raw") || normalizedName.includes("input") || normalizedName.includes("hammadde") || normalizedName.includes("girdi")) {
     return "raw";
   }
 
   if (
     normalizedName.includes("finished") ||
     normalizedName.includes("shipment") ||
-    normalizedName.includes("output")
+    normalizedName.includes("output") ||
+    normalizedName.includes("çıktı") ||
+    normalizedName.includes("işlenmiş")
   ) {
     return "finished";
   }

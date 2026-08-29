@@ -37,9 +37,9 @@ function createCncCell(index: number, x: number, z: number): FactoryObject[] {
 
   return [
     createDemoObject("vertical-cnc", `CNC-${code}`, x, z),
-    createDemoObject("pallet", `CNC-${code} Input Pallet`, x - 0.95, z + 2.65),
-    createDemoObject("pallet", `CNC-${code} Output Pallet`, x + 0.95, z + 2.65),
-    createDemoObject("operator", `Operator CNC-${code}`, x + 3.45, z, -Math.PI / 2),
+    createDemoObject("pallet", `CNC-${code} / Girdi Paleti / Hammadde`, x - 0.95, z + 2.65),
+    createDemoObject("pallet", `CNC-${code} / Çıktı Paleti / İşlenmiş Parça`, x + 0.95, z + 2.65),
+    createDemoObject("operator", `Operatör CNC-${code}`, x + 3.45, z, -Math.PI / 2),
   ];
 }
 
