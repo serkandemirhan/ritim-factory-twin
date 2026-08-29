@@ -145,18 +145,18 @@ export function FactoryScene({ onObjectContextMenu }: FactorySceneProps) {
 
   return (
     <>
-      <color attach="background" args={["#eef3f6"]} />
-      <ambientLight intensity={1.1} />
+      <color attach="background" args={["#0b1117"]} />
+      <ambientLight intensity={0.68} />
       <directionalLight
         castShadow
-        intensity={1.5}
+        intensity={1.2}
         position={[12, 18, 8]}
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
       />
-      <hemisphereLight intensity={0.6} color="#ffffff" groundColor="#cbd5e1" />
+      <hemisphereLight intensity={0.48} color="#b6d9dc" groundColor="#101820" />
       <FactoryFloor />
-      <gridHelper args={[64, 64, "#94a3b8", "#cbd5e1"]} position={[0, 0.001, 0]} />
+      <gridHelper args={[64, 32, "#21343b", "#16252c"]} position={[0, 0.001, 0]} />
 
       {objects.map((object) => (
         <FactoryObject3D

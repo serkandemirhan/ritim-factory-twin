@@ -5,6 +5,9 @@ import { SceneContextMenu } from "../components/layout/SceneContextMenu";
 import { ObjectLibrary } from "../components/layout/ObjectLibrary";
 import { PropertiesPanel } from "../components/layout/PropertiesPanel";
 import { TopBar } from "../components/layout/TopBar";
+import { SideNav } from "../components/layout/SideNav";
+import { BottomStatusBar } from "../components/layout/BottomStatusBar";
+import { MachineInspector } from "../components/layout/MachineInspector";
 import { useFactoryStore } from "../store/factoryStore";
 
 export function App() {
@@ -13,6 +16,7 @@ export function App() {
   const [isLibraryOpen, setIsLibraryOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(true);
+  const [activeSection, setActiveSection] = useState("Factory");
   const [contextMenu, setContextMenu] = useState<{
     objectId: string;
     x: number;
@@ -95,13 +99,8 @@ export function App() {
         onActivityToggle={() => setIsActivityOpen((open) => !open)}
       />
 
-      <main
-        className={
-          !isMobile && applicationMode === "design" && isLibraryOpen
-            ? "workspace"
-            : "workspace is-library-closed"
-        }
-      >
+      <main className={!isMobile && applicationMode === "design" && isLibraryOpen ? "workspace" : "workspace is-library-closed"}>
+        {!isMobile && <SideNav active={activeSection} onChange={setActiveSection} />}
         {!isMobile && applicationMode === "design" && isLibraryOpen && (
           <ObjectLibrary onAddObject={addObjectFromLibrary} onClose={() => setIsLibraryOpen(false)} />
         )}
@@ -113,14 +112,16 @@ export function App() {
           />
         </section>
 
-        {applicationMode === "operations" ? (
+        {applicationMode === "operations" && isMobile ? (
           <ActivityPanel
             isMobile={isMobile}
             isOpen={isActivityOpen}
             onToggle={() => setIsActivityOpen((open) => !open)}
           />
-        ) : <PropertiesPanel />}
+        ) : applicationMode === "design" ? <PropertiesPanel /> : null}
+        {applicationMode === "operations" && <MachineInspector />}
       </main>
+      <BottomStatusBar />
       {contextMenu && (
         <SceneContextMenu
           objectId={contextMenu.objectId}

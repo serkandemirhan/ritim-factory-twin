@@ -85,15 +85,15 @@ export function FactoryFloor() {
     <group>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
         <planeGeometry args={[64, 60]} />
-        <meshStandardMaterial color="#d7e0e0" roughness={0.92} />
+        <meshStandardMaterial color="#202b30" roughness={0.92} />
       </mesh>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[42, -0.012, 0]}>
         <planeGeometry args={[20, 46]} />
-        <meshStandardMaterial color="#aebdc1" roughness={0.9} />
+        <meshStandardMaterial color="#162127" roughness={0.9} />
       </mesh>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[-42, -0.012, 23]}>
         <planeGeometry args={[20, 12]} />
-        <meshStandardMaterial color="#aebdc1" roughness={0.9} />
+        <meshStandardMaterial color="#162127" roughness={0.9} />
       </mesh>
 
       <FloorZone position={[-4, 0.01, -3]} size={[46, 34]} color="#b6d8d6"><ZoneBorder size={[46, 34]} color="#5c8d8a" /></FloorZone>

@@ -13,8 +13,8 @@ const statusStyles: Record<MachineStatus, { color: string; glow: string }> = {
 
 export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps) {
   const statusStyle = statusStyles[status];
-  // The full enclosure is the status signal: green running, amber stopped, red alarm.
-  const bodyColor = selected ? "#fbbf24" : statusStyle.color;
+  // Keep industrial equipment neutral; its beacon and slim status strip carry the live state.
+  const bodyColor = selected ? "#345d61" : "#aeb9bb";
   const darkMetal = "#26343b";
 
   return (
@@ -25,7 +25,7 @@ export function MachinePlaceholder({ selected, status }: MachinePlaceholderProps
       </mesh>
       <mesh castShadow receiveShadow position={[0, 1.5, 0]}>
         <boxGeometry args={[3.55, 2.65, 2.45]} />
-        <meshStandardMaterial color={bodyColor} emissive={bodyColor} emissiveIntensity={0.08} metalness={0.22} roughness={0.52} />
+        <meshStandardMaterial color={bodyColor} metalness={0.22} roughness={0.52} />
       </mesh>
 
       <mesh castShadow position={[0, 1.54, 1.25]}>

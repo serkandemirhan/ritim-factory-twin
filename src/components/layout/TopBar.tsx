@@ -54,7 +54,7 @@ export function TopBar({
     <header className="top-bar">
       <div className="brand-block">
         <div>
-          <h1>Ritim Factory Twin</h1>
+          <h1><span className="ritim-mark">R</span> RITIM <em>Factory Twin</em></h1>
         </div>
         {!isMobileOperationsOnly && <div className="mode-toggle">
           <button
@@ -75,6 +75,8 @@ export function TopBar({
       </div>
 
       <div className="top-bar-controls">
+        <span className="factory-selector">Factory 01</span>
+        <span className="live-indicator">● LIVE</span>
         {applicationMode === "design" && (
           <TransformToolbar
             activeMode={activeTransformMode}
