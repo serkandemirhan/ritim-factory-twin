@@ -207,9 +207,9 @@ export function FactoryObject3D({
         <Billboard position={[0, 4.25, 0]}>
           <Text
             fontSize={0.44}
-            color="#101820"
-            outlineWidth={0.025}
-            outlineColor="#f8fafc"
+            color="#d8f4f1"
+            outlineWidth={0.035}
+            outlineColor="#071015"
             anchorX="center"
             anchorY="middle"
             letterSpacing={0.04}

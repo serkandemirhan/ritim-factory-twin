@@ -41,7 +41,17 @@ function ZoneBorder({ size, color = "#52727a" }: { size: [number, number]; color
 
 function FloorLabel({ children, position, size = 0.62 }: { children: string; position: [number, number, number]; size?: number }) {
   return (
-    <Text position={position} rotation={[-Math.PI / 2, 0, 0]} fontSize={size} color="#17212a" anchorX="center" anchorY="middle" letterSpacing={0.08}>
+    <Text
+      position={position}
+      rotation={[-Math.PI / 2, 0, 0]}
+      fontSize={size}
+      color="#bfe5e2"
+      outlineWidth={0.018}
+      outlineColor="#10191e"
+      anchorX="center"
+      anchorY="middle"
+      letterSpacing={0.08}
+    >
       {children}
     </Text>
   );
