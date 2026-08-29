@@ -18,6 +18,8 @@
   .machine-inspector.is-empty { display:none !important; }
 }
 @keyframes inspector-rise { from { transform:translateY(18px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+.inspector-tabs button { padding:0; border:0; background:transparent; color:#71878f; font-size:.72rem; cursor:pointer; }
+.inspector-tabs button.is-active { color:#19d3c5; }
 
 /* Operations cockpit overrides */
 :root { color: #d9e5e8; background: #080d12; color-scheme: dark; }
