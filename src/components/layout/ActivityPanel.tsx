@@ -36,11 +36,11 @@ export function ActivityPanel({ isMobile, isOpen, onToggle }: ActivityPanelProps
     <aside className={`panel activity-panel${isOpen ? "" : " is-collapsed"}${isMobile && !isOpen ? " is-mobile-hidden" : ""}`}>
       <div className="panel-header activity-header">
         <div>
-          <h2>Operations Activity</h2>
-          <p>Ritim live simulation</p>
+          <h2>Operasyon Aktivitesi</h2>
+          <p>Ritim canlı simülasyon</p>
         </div>
         {!isMobile && <button className="panel-toggle" onClick={onToggle} type="button">
-          {isOpen ? "Hide" : "Open"}
+          {isOpen ? "Gizle" : "Aç"}
         </button>}
       </div>
 
@@ -48,15 +48,15 @@ export function ActivityPanel({ isMobile, isOpen, onToggle }: ActivityPanelProps
         <>
           <div className="connection-list">
             <span>Ritim CNC</span>
-            <span>Ritim Quality</span>
-            <span>Ritim Inventory</span>
-            <span>Ritim Workforce</span>
+            <span>Ritim Kalite</span>
+            <span>Ritim Stok</span>
+            <span>Ritim İş Gücü</span>
           </div>
           <div className="activity-list">
             {activities.length === 0 ? (
               <div className="empty-state activity-empty">
-                <strong>Waiting for activity</strong>
-                <span>The first simulated event will arrive shortly.</span>
+                <strong>Aktivite bekleniyor</strong>
+                <span>İlk simülasyon olayı kısa süre içinde gelecektir.</span>
               </div>
             ) : (
               activities.map((activity) => {
@@ -73,7 +73,7 @@ export function ActivityPanel({ isMobile, isOpen, onToggle }: ActivityPanelProps
                       <span>{activity.source}</span>
                       <time>{formatTime(activity.createdAt)}</time>
                     </div>
-                    <strong>{object?.name ?? "Factory object"}</strong>
+                    <strong>{object?.name ?? "Fabrika nesnesi"}</strong>
                     <p>{activity.message}</p>
                   </button>
                 );
@@ -90,12 +90,12 @@ export function ActivityPanel({ isMobile, isOpen, onToggle }: ActivityPanelProps
           >
             <div className="activity-detail-header">
               <span>{selectedActivity.source}</span>
-              <button onClick={closeActivityDetail} type="button">Close</button>
+              <button onClick={closeActivityDetail} type="button">Kapat</button>
             </div>
-            <h2>{objects.find((item) => item.id === selectedActivity.objectId)?.name ?? "Factory object"}</h2>
+            <h2>{objects.find((item) => item.id === selectedActivity.objectId)?.name ?? "Fabrika nesnesi"}</h2>
             <p>{selectedActivity.message}</p>
-            <time>{formatTime(selectedActivity.createdAt)} · Simulated operational notification</time>
-            <small>This detail will close automatically in 5 seconds.</small>
+            <time>{formatTime(selectedActivity.createdAt)} · Simüle edilmiş operasyon bildirimi</time>
+            <small>Bu detay 5 saniye içinde otomatik kapanır.</small>
           </section>
         </div>
       )}

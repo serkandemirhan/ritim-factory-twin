@@ -16,7 +16,7 @@ export function App() {
   const [isLibraryOpen, setIsLibraryOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isActivityOpen, setIsActivityOpen] = useState(true);
-  const [activeSection, setActiveSection] = useState("Factory");
+  const [activeSection, setActiveSection] = useState("Fabrika");
   const [contextMenu, setContextMenu] = useState<{
     objectId: string;
     x: number;

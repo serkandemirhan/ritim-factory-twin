@@ -21,7 +21,7 @@ interface TopBarProps {
 
 function formatSavedAt(savedAt: string | null): string {
   if (!savedAt) {
-    return "Not saved yet";
+    return "Henüz kaydedilmedi";
   }
 
   return new Intl.DateTimeFormat("en", {
@@ -54,7 +54,7 @@ export function TopBar({
     <header className="top-bar">
       <div className="brand-block">
         <div>
-          <h1><span className="ritim-mark">R</span> RITIM <em>Factory Twin</em></h1>
+          <h1><span className="ritim-mark">R</span> RITIM <em>Fabrika İkizi</em></h1>
         </div>
         {!isMobileOperationsOnly && <div className="mode-toggle">
           <button
@@ -75,8 +75,8 @@ export function TopBar({
       </div>
 
       <div className="top-bar-controls">
-        <span className="factory-selector">Factory 01</span>
-        <span className="live-indicator">● LIVE</span>
+        <span className="factory-selector">Fabrika 01</span>
+        <span className="live-indicator">● CANLI</span>
         {applicationMode === "design" && (
           <TransformToolbar
             activeMode={activeTransformMode}
@@ -90,8 +90,8 @@ export function TopBar({
               className={isActivityOpen ? "activity-toggle is-active" : "activity-toggle"}
               onClick={onActivityToggle}
               type="button"
-              aria-label={isActivityOpen ? "Hide activity panel" : "Show activity panel"}
-              title={isActivityOpen ? "Hide activity" : "Show activity"}
+              aria-label={isActivityOpen ? "Aktivite panelini gizle" : "Aktivite panelini göster"}
+              title={isActivityOpen ? "Aktiviteyi gizle" : "Aktiviteyi göster"}
             >
               <svg aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M4 18V10m5 8V5m5 13v-6m5 6V8" />
@@ -102,8 +102,8 @@ export function TopBar({
             className="fullscreen-button"
             onClick={onToggleFullscreen}
             type="button"
-            aria-label={isFullscreen ? "Exit full screen" : "Enter full screen"}
-            title={isFullscreen ? "Exit full screen" : "Full screen"}
+            aria-label={isFullscreen ? "Tam ekrandan çık" : "Tam ekrana geç"}
+            title={isFullscreen ? "Tam ekrandan çık" : "Tam ekran"}
           >
             <svg aria-hidden="true" viewBox="0 0 24 24">
               {isFullscreen ? (
@@ -115,7 +115,7 @@ export function TopBar({
           </button>
           {applicationMode === "design" && (
             <button className="library-toggle" onClick={onLibraryToggle} type="button">
-              {isLibraryOpen ? "Hide Library" : "Open Library"}
+              {isLibraryOpen ? "Kütüphaneyi Gizle" : "Kütüphaneyi Aç"}
             </button>
           )}
           {applicationMode === "design" && (

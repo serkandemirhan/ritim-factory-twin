@@ -10,10 +10,10 @@ export function ObjectLibrary({ onAddObject, onClose }: ObjectLibraryProps) {
     <aside className="panel library-panel">
       <div className="panel-header library-header">
         <div>
-          <h2>Object Library</h2>
-          <p>Predefined Ritim layout components</p>
+          <h2>Nesne Kütüphanesi</h2>
+          <p>Hazır Ritim yerleşim bileşenleri</p>
         </div>
-        <button className="panel-toggle" onClick={onClose} type="button">Close</button>
+        <button className="panel-toggle" onClick={onClose} type="button">Kapat</button>
       </div>
 
       <div className="library-groups">

@@ -23,7 +23,7 @@ export function SceneContextMenu({
   }
 
   const renameObject = () => {
-    const name = window.prompt("Object name", object.name)?.trim();
+    const name = window.prompt("Nesne adı", object.name)?.trim();
 
     if (name) {
       updateObject(objectId, { name });
@@ -35,7 +35,7 @@ export function SceneContextMenu({
   return (
     <div className="scene-context-menu" style={{ left: position.x, top: position.y }}>
       <div className="context-menu-title">{object.name}</div>
-      <button onClick={renameObject} type="button">Rename</button>
+      <button onClick={renameObject} type="button">Yeniden Adlandır</button>
       <button
         onClick={() => {
           duplicateObject(objectId);
