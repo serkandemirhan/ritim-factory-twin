@@ -199,6 +199,12 @@ export function FactoryObject3D({
       {definition.category === "Machines" && (
         <MachinePlaceholder selected={selected} status={machineStatus} variant={machineDetails?.variant ?? 0} />
       )}
+      {definition.category === "Machines" && selected && (
+        <mesh position={[0, 0.028, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[2.08, 2.16, 4]} />
+          <meshBasicMaterial color="#19d3c5" transparent opacity={0.82} side={2} />
+        </mesh>
+      )}
       {definition.category === "Machines" && machineDetails && (
         <Billboard position={[0, 4.25, 0]}>
           <Text

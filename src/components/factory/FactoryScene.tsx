@@ -156,7 +156,7 @@ export function FactoryScene({ onObjectContextMenu }: FactorySceneProps) {
       />
       <hemisphereLight intensity={0.48} color="#b6d9dc" groundColor="#101820" />
       <FactoryFloor />
-      <gridHelper args={[64, 32, "#21343b", "#16252c"]} position={[0, 0.001, 0]} />
+      <gridHelper args={[64, 18, "#1b2c32", "#142127"]} position={[0, 0.001, 0]} />
 
       {objects.map((object) => (
         <FactoryObject3D
